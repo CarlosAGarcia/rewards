@@ -1,20 +1,27 @@
 import React , { useState, useEffect } from 'react'
 import * as THREE from 'three'
 
-const MAX_TIME_BETWEEN_OBJS = 4 // in seconds
 
 export default function Basic(props) {
+    // 3 JS key variables
     const [ scene, setScene ] = useState(new THREE.Scene())
     const [ camera, setCamera ] = useState(new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000))
     const [ renderer, setRenderer ] = useState(new THREE.WebGLRenderer())
+    const [ imgLoader, setImgLoader ] = useState(new THREE.ImageBitmapLoader())
+    const [ geometry, setGeometry ] = useState(new THREE.BoxGeometry( 1, 1, 1 ))
+
+
 
     const [ objects, setObjects ] = useState([])
 
     // init scene/camera/renderer
     const init = () => {
+        // makes sure vars are set
         if (!scene) setScene(new THREE.Scene()) 
         if (!camera) setCamera(new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000)) 
         if (!renderer) setRenderer(new THREE.WebGLRenderer()) 
+        if (!imgLoader) setImgLoader(new THREE.ImageBitmapLoader()) 
+        if (!geometry) setGeometry(new THREE.BoxGeometry( 1, 1, 1 )) 
 
         // init camera pos
         camera.position.z = 1;
@@ -30,9 +37,12 @@ export default function Basic(props) {
         renderer.setClearColor(scene.fog.color);
         document.body.appendChild(renderer.domElement);
 
-        render();
 
         console.log('init', { scene, camera })
+        // adds object
+        addObject()
+
+        render();
     }
 
     const render = () => {
@@ -63,15 +73,28 @@ export default function Basic(props) {
         }
     }, [])
 
-    // objects
-    useEffect(() => {
-        // objects.forEach(obj => {
-            
-        // });
 
+    const addObject = () => {
+        // adds image from source file
+        console.log('ob', objects)
+        new THREE.ImageLoader()
+            .setCrossOrigin( '*' )
+            .load( 'images/goldtexture.jpg?' + performance.now(), function ( image ) {
+                // texture
+                const texture = new THREE.CanvasTexture( image );
+                const material = new THREE.MeshBasicMaterial( { color: 0xff8888, map: texture } );
 
-        setObjects(props.objects)
-    }, [props.objects])
+                // object + texture
+                const cube = new THREE.Mesh( geometry, material );
+				cube.position.set( Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1 );
+				cube.rotation.set( Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI );
+
+                // adding created object to state arr
+                setObjects(prevObjects => [ ...prevObjects, cube ])
+            } );
+        console.log('ob2', objects)
+
+    }
 
     return (
         <div>
