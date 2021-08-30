@@ -1,5 +1,7 @@
 import React , { useState, useEffect } from 'react'
 import * as THREE from 'three'
+import img from './images/goldtexture.jpg'
+import { getTXs } from '../actions/actions'
 
 
 export default function Basic(props) {
@@ -41,16 +43,14 @@ export default function Basic(props) {
         console.log('init', { scene, camera })
         // adds object
         addObject()
-
+        getTXs()
         render();
     }
 
     const render = () => {
         renderer.render(scene, camera);
         requestAnimationFrame(render);
-
     }
-
 
     // mount/unmount
     useEffect(() => {
@@ -76,24 +76,29 @@ export default function Basic(props) {
 
     const addObject = () => {
         // adds image from source file
-        console.log('ob', objects)
-        new THREE.ImageLoader()
-            .setCrossOrigin( '*' )
-            .load( 'images/goldtexture.jpg?' + performance.now(), function ( image ) {
-                // texture
-                const texture = new THREE.CanvasTexture( image );
-                const material = new THREE.MeshBasicMaterial( { color: 0xff8888, map: texture } );
+        console.log('w', img)
 
-                // object + texture
-                const cube = new THREE.Mesh( geometry, material );
-				cube.position.set( Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1 );
-				cube.rotation.set( Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI );
+        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+        
+        const cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
 
-                // adding created object to state arr
-                setObjects(prevObjects => [ ...prevObjects, cube ])
+        new THREE.ImageLoader().load(img, function ( image ) {
+            // texture
+            const texture = new THREE.CanvasTexture( image );
+            const material = new THREE.MeshBasicMaterial( { color: 0xff8888, map: texture } );
+
+            // object + texture
+            const cube = new THREE.Mesh( geometry, material );
+            cube.position.set( Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1 );
+            cube.rotation.set( Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI );
+
+            // adding created object to state arr
+            setObjects(prevObjects => [ ...prevObjects, cube ])
             } );
-        console.log('ob2', objects)
 
+        console.log('ob2', objects)
     }
 
     return (
