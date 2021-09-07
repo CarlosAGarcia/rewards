@@ -1,9 +1,8 @@
 import React , { useState, useEffect } from 'react'
 import * as THREE from 'three'
-import img from './images/goldtexture.jpg'
-import { getTXs } from '../actions/actions'
+import Transactions from '../viz/Transactions'
 
-
+// Contains code for backdrop
 export default function Basic(props) {
     // 3 JS key variables
     const [ scene, setScene ] = useState(new THREE.Scene())
@@ -11,10 +10,6 @@ export default function Basic(props) {
     const [ renderer, setRenderer ] = useState(new THREE.WebGLRenderer())
     const [ imgLoader, setImgLoader ] = useState(new THREE.ImageBitmapLoader())
     const [ geometry, setGeometry ] = useState(new THREE.BoxGeometry( 1, 1, 1 ))
-
-
-
-    const [ objects, setObjects ] = useState([])
 
     // init scene/camera/renderer
     const init = () => {
@@ -39,11 +34,7 @@ export default function Basic(props) {
         renderer.setClearColor(scene.fog.color);
         document.body.appendChild(renderer.domElement);
 
-
         console.log('init', { scene, camera })
-        // adds object
-        addObject()
-        getTXs()
         render();
     }
 
@@ -54,7 +45,6 @@ export default function Basic(props) {
 
     // mount/unmount
     useEffect(() => {
-
         // event handler for resizing camera as per window
         const handleResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight
@@ -62,11 +52,8 @@ export default function Basic(props) {
             renderer.setSize(window.innerWidth, window.innerHeight)
         }
 
-        console.log('mount bg')
-
         window.addEventListener('resize', handleResize, false)
         init()
-
         return () => {
             window.removeEventListener('resize', handleResize, false)
             console.log('unmount bg')
@@ -74,36 +61,9 @@ export default function Basic(props) {
     }, [])
 
 
-    const addObject = () => {
-        // adds image from source file
-        console.log('w', img)
-
-        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-        
-        const cube = new THREE.Mesh( geometry, material );
-        scene.add( cube );
-
-        new THREE.ImageLoader().load(img, function ( image ) {
-            // texture
-            const texture = new THREE.CanvasTexture( image );
-            const material = new THREE.MeshBasicMaterial( { color: 0xff8888, map: texture } );
-
-            // object + texture
-            const cube = new THREE.Mesh( geometry, material );
-            cube.position.set( Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1 );
-            cube.rotation.set( Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI );
-
-            // adding created object to state arr
-            setObjects(prevObjects => [ ...prevObjects, cube ])
-            } );
-
-        console.log('ob2', objects)
-    }
-
     return (
         <div>
-            
+            <Transactions/>
         </div>
     )
 }
