@@ -1,21 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
+import HeaderFullWidth from '../StyledComponents/banner/HeaderFullWidth'
 import './Txs.css';
 
 export default function Transactions(props) {
+    const { onEvent } = props
+
     // initial fns necessary to set up dispatch + selector
     const transactions = useSelector(state => state.transactions);
     const dispatch = useDispatch()
-    // on transaction
-    useEffect(() => {
-        console.log('transactions updated', transactions)
-    }, [transactions])
 
     const [ transactionsState, setTransactionsState ] = useState([])
 
+    // on transaction
+    useEffect(() => {
+        console.log('transactions updated', transactions)
+        if (JSON.stringify(transactionsState) !== JSON.stringify(transactions)) {
+            setTransactionsState(transactions)
+            onEvent({ key: 'TRANSACTION' })
+        }
+    }, [ transactions, onEvent, transactionsState ])
+
+
     return (
         <div className='transactionsWrapper'>
-            <button onClick={() => dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }>NEW TX</button>
+            <HeaderFullWidth customClassname={'header'}>
+                <div className='containerWrapper'>
+
+                <div className='container'>
+                    <div className='blockchainText'>
+                            NOW SHOWING:
+                        </div>
+                        <div className='blockChainType'>
+                            <div className='type'>BLOCKCHAIN</div>
+                            <div className='value'>ETHEREUM</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <button onClick={() => dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }>SEND TEST TRANSACTIOn</button> */}
+
+            </HeaderFullWidth>
         </div>
     )
 }

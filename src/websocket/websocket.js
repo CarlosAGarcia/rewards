@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import React , { useState, useEffect } from 'react'
 
-const awsWebsocketUrl = '' //"wss://sgza54zq2j.execute-api.us-east-2.amazonaws.com/production"
+const awsWebsocketUrl = "wss://sgza54zq2j.execute-api.us-east-2.amazonaws.com/production"
 
 const connectToAWSWebsocket = ({ onConnect, onMsg, onDisconnect }) => {
     console.log('Trying to connect to ws at: ', awsWebsocketUrl)
@@ -31,25 +31,25 @@ export default function WebSocketProvider(props) {
     const [ websocket, setWebSocket ] = useState()
 
     // connects websocket
-    useEffect(() => {
-        const onConnect = (e) => {
-            console.log('%c Connected', 'color: lightgreen;font-size:2rem;text-shadow: 3px 3px 0 #00ff')
-            console.log('Connection data', { data: e?.data });
-        }
-        const onMsg = (e) => {
-            console.log('e ->', e)
-            dispatch({ type: 'MINED_TRANSACTION', payload: e })
-        }
-        const onDisconnect = (e) => {
-            console.log('%c WARNING: WEBSOCKET DISCONNECTED', 'color:#FF9C2A;font-size:2rem;text-shadow: 3px 3px 0 rgb(217,31,38)')
-            console.log('Connection closed', { data: e?.data });
-        }
+    // useEffect(() => {
+    //     const onConnect = (e) => {
+    //         console.log('%c Connected', 'color: lightgreen;font-size:2rem;text-shadow: 3px 3px 0 #00ff')
+    //         console.log('Connection data', { data: e?.data });
+    //     }
+    //     const onMsg = (e) => {
+    //         console.log('e ->', e)
+    //         dispatch({ type: 'MINED_TRANSACTION', payload: e })
+    //     }
+    //     const onDisconnect = (e) => {
+    //         console.log('%c WARNING: WEBSOCKET DISCONNECTED', 'color:#FF9C2A;font-size:2rem;text-shadow: 3px 3px 0 rgb(217,31,38)')
+    //         console.log('Connection closed', { data: e?.data });
+    //     }
 
-        if (!websocket) setWebSocket(connectToAWSWebsocket({ onConnect, onMsg, onDisconnect }))
-        return () => {
-            websocket?.close()
-        }
-    }, [ websocket, dispatch ])
+    //     if (!websocket) setWebSocket(connectToAWSWebsocket({ onConnect, onMsg, onDisconnect }))
+    //     return () => {
+    //         websocket?.close()
+    //     }
+    // }, [ websocket, dispatch ])
 
     return (
         <div>

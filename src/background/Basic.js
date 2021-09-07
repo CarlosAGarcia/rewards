@@ -60,10 +60,26 @@ export default function Basic(props) {
         }
     }, [])
 
+    // Every time an event happens
+    const onEvent = (event) => {
+        const { key } = event
+
+        switch (key) {
+            case 'TRANSACTION':
+                addTransaction(event)
+                break;
+            default:
+                break;
+        }
+    }
+
+    const addTransaction = (event) => {
+        console.log('addTransaction', event)
+    }
 
     return (
         <div>
-            <Transactions/>
+            <Transactions onEvent={onEvent}/>
         </div>
     )
 }
