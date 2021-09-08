@@ -1,7 +1,7 @@
 import React , { useState, useEffect } from 'react'
 import * as THREE from 'three'
 import Transactions from '../viz/Transactions'
-
+import ConnectionToAWSLoader from '../StyledComponents/Loaders/ConnectionToAWSLoader' 
 // Contains code for backdrop
 export default function Basic(props) {
     // 3 JS key variables
@@ -10,7 +10,7 @@ export default function Basic(props) {
     const [ renderer, setRenderer ] = useState(new THREE.WebGLRenderer())
     const [ imgLoader, setImgLoader ] = useState(new THREE.ImageBitmapLoader())
     const [ geometry, setGeometry ] = useState(new THREE.BoxGeometry( 1, 1, 1 ))
-
+// #6f4775
     // init scene/camera/renderer
     const init = () => {
         // makes sure vars are set
@@ -21,7 +21,7 @@ export default function Basic(props) {
         if (!geometry) setGeometry(new THREE.BoxGeometry( 1, 1, 1 )) 
 
         // init camera pos
-        camera.position.z = 1;
+        camera.position.z = 0;
         camera.rotation.x = 1.16;
         camera.rotation.y = -0.12;
         camera.rotation.z = 0.27;
@@ -80,6 +80,7 @@ export default function Basic(props) {
     return (
         <div>
             <Transactions onEvent={onEvent}/>
+            <ConnectionToAWSLoader />
         </div>
     )
 }

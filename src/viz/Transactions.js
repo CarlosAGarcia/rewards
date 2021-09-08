@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import HeaderFullWidth from '../StyledComponents/banner/HeaderFullWidth'
-import './Txs.css';
+import media from '../media/ethereum.svg'
 
 export default function Transactions(props) {
     const { onEvent } = props
@@ -26,21 +26,29 @@ export default function Transactions(props) {
         <div className='transactionsWrapper'>
             <HeaderFullWidth customClassname={'header'}>
                 <div className='containerWrapper'>
-
-                <div className='container'>
-                    <div className='blockchainText'>
-                            NOW SHOWING:
+                    <div className='container'>
+                        <div className='containerLeft containerInner'>
+                            <div className='blockchainText'>
+                                BLOCKCHAIN
+                            </div>
+                            <div className='blockChainType glow'>
+                                <div className='value'>ETHEREUM</div>
+                            </div>
                         </div>
-                        <div className='blockChainType'>
-                            <div className='type'>BLOCKCHAIN</div>
-                            <div className='value'>ETHEREUM</div>
+                        <div className='containerMiddle'><img className='svg' src={media} alt="Ethereum logo"/></div>
+                        <div className='containerRight containerInner'>
+                            <div className='blockChainType glow'>
+                                <div className='value'>TRANSACTIONS</div>
+                            </div>
+                            
+                            <div className='blockchainText'>
+                                EVENTS
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                {/* <button onClick={() => dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }>SEND TEST TRANSACTIOn</button> */}
-
             </HeaderFullWidth>
+             {/* <button onClick={() => dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }>SEND TEST TRANSACTIOn</button> */}
         </div>
     )
 }
