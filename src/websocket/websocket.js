@@ -35,7 +35,7 @@ export default function WebSocketProvider(props) {
     //     const onConnect = (e) => {
     //         console.log('%c Connected', 'color: lightgreen;font-size:2rem;text-shadow: 3px 3px 0 #00ff')
     //         console.log('Connection data', { data: e?.data });
-            // dispatch({ type: 'AWS_CONNECTED', payload: e })
+            // dispatch({ type: 'AWS_CONNECTED' })
     //     }
     //     const onMsg = (e) => {
     //         console.log('e ->', e)
@@ -44,10 +44,13 @@ export default function WebSocketProvider(props) {
     //     const onDisconnect = (e) => {
     //         console.log('%c WARNING: WEBSOCKET DISCONNECTED', 'color:#FF9C2A;font-size:2rem;text-shadow: 3px 3px 0 rgb(217,31,38)')
     //         console.log('Connection closed', { data: e?.data });
-     // dispatch({ type: 'AWS_DISCONNECTED', payload: e })
+     // dispatch({ type: 'AWS_DISCONNECTED' })
     //     }
 
-    //     if (!websocket) setWebSocket(connectToAWSWebsocket({ onConnect, onMsg, onDisconnect }))
+    //     if (!websocket){
+            // dispatch({ type: 'AWS_DISCONNECTED' })
+        // setWebSocket(connectToAWSWebsocket({ onConnect, onMsg, onDisconnect }))
+    // }
     //     return () => {
     //         websocket?.close()
     //     }
