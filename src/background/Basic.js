@@ -21,7 +21,7 @@ export default function Basic(props) {
         if (!geometry) setGeometry(new THREE.BoxGeometry( 1, 1, 1 )) 
 
         // init camera pos
-        camera.position.z = 0;
+        camera.position.z = 1;
         camera.rotation.x = 1.16;
         camera.rotation.y = -0.12;
         camera.rotation.z = 0.27;

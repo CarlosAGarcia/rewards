@@ -48,7 +48,7 @@ export default function WebSocketProvider(props) {
     //     }
 
     //     if (!websocket){
-            // dispatch({ type: 'AWS_DISCONNECTED' })
+            // dispatch({ type: 'AWS_LOADING' })
         // setWebSocket(connectToAWSWebsocket({ onConnect, onMsg, onDisconnect }))
     // }
     //     return () => {
