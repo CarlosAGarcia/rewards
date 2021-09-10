@@ -38,6 +38,7 @@ const rootReducer = (state = initialState, action) => {
       case 'MINED_TRANSACTION':
         return {
             ...state,
+            newTransaction: action.payload,
             transactions: [ ...state?.transactions, action.payload ]
         }
         case 'CLEAR_TRANSACTIONS':

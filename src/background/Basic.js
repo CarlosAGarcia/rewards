@@ -2,6 +2,7 @@ import React , { useState, useEffect } from 'react'
 import * as THREE from 'three'
 import Transactions from '../viz/Transactions'
 import ConnectionToAWSLoader from '../StyledComponents/Loaders/ConnectionToAWSLoader' 
+import { TrackballControls } from './TrackballControls';
 // Contains code for backdrop
 
 export const CAM_POS_X = 4;
@@ -13,9 +14,21 @@ export default function Basic(props) {
     const [ scene, setScene ] = useState(new THREE.Scene())
     const [ camera, setCamera ] = useState(new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000))
     const [ renderer, setRenderer ] = useState(new THREE.WebGLRenderer())
-    const [ imgLoader, setImgLoader ] = useState(new THREE.ImageBitmapLoader())
-    const [ geometry, setGeometry ] = useState(new THREE.BoxGeometry( 1, 1, 1 ))
+    const [ controls, setControls ] = useState()
 
+    // const [ imgLoader, setImgLoader ] = useState(new THREE.ImageBitmapLoader())
+    // const [ geometry, setGeometry ] = useState(new THREE.BoxGeometry( 1, 1, 1 ))
+
+    const createSymbol = ({ width, height, depth, x, y, z, customGeometry, colour, customMaterial }) => {
+        const boxgeometry = new THREE.BoxGeometry( width, height, depth );
+        const material = new THREE.MeshBasicMaterial({ colour });
+        const cube = new THREE.Mesh( boxgeometry, material );
+        cube.position.set(x,y,z)
+
+        scene.add( cube );
+
+        return cube
+    }
 
 // scroll + rotate along Y axis (look around horizontally to be implemented)
     const createCenterSymbol = () => {
@@ -52,8 +65,9 @@ export default function Basic(props) {
         if (!scene) setScene(new THREE.Scene()) 
         if (!camera) setCamera(new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000)) 
         if (!renderer) setRenderer(new THREE.WebGLRenderer()) 
-        if (!imgLoader) setImgLoader(new THREE.ImageBitmapLoader()) 
-        if (!geometry) setGeometry(new THREE.BoxGeometry( 1, 1, 1 ))
+        if (!controls) setControls(new TrackballControls( camera, renderer.domElement ))
+
+        // if (!imgLoader) setImgLoader(new THREE.ImageBitmapLoader())
   
         const axesHelper = new THREE.AxesHelper( 5 );
         scene.add( axesHelper );
@@ -71,25 +85,18 @@ export default function Basic(props) {
         camera.rotation.y = 0;
         camera.rotation.z = 0;
 
-        // let ambient = new THREE.AmbientLight(0xffff, 1);
-        // scene.add(ambient);
+        controls.rotateSpeed = 1.0;
+        controls.zoomSpeed = 1.2;
+        controls.panSpeed = 0.8;
+        controls.noZoom = false;
+        controls.noPan = false;
+        controls.staticMoving = true;
+        controls.dynamicDampingFactor = 0.3;
 
         renderer.setSize(window.innerWidth,window.innerHeight);
         scene.fog = new THREE.FogExp2('#0a0101', 0.001);
         renderer.setClearColor(scene.fog.color);
         document.body.appendChild(renderer.domElement);
-
-
-
-        // const light = new THREE.PointLight( 0xe444, 100, 100, 1 );
-        // light.position.set( 0,0,0 );
-
-        // scene.add( light );
-        // const sphereSize = 2;
-        // const pointLightHelper = new THREE.PointLightHelper( light, sphereSize );
-        // scene.add( pointLightHelper );
-
-
 
         console.log('init', { scene, camera })
         render();
@@ -130,8 +137,20 @@ export default function Basic(props) {
         }
     }
 
+    // TODO: fix the formatting once you get actual payload
     const addTransaction = (event) => {
         console.log('addTransaction', event)
+        const { key, transactions, newTransaction } = event
+
+        if (newTransaction?.body?.fullTransaction) {
+            const { value, } = newTransaction?.body?.fullTransaction
+
+            addFloatingCoinDirectional({ objValues: newTransaction?.body?.fullTransaction, })
+        }
+        console.log({ key, transactions, newTransaction })
+    }
+    const addFloatingCoinDirectional = ({ objValues }) => {
+
     }
 
     return (

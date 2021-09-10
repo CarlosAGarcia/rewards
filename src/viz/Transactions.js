@@ -8,18 +8,26 @@ export default function Transactions(props) {
 
     // initial fns necessary to set up dispatch + selector
     const transactions = useSelector(state => state.transactions);
+    const newTransaction = useSelector(state => state.newTransaction);
+    
     const dispatch = useDispatch()
 
     const [ transactionsState, setTransactionsState ] = useState([])
+    const [ newTransactionState, setNewTransaction ] = useState({})
 
     // on transaction
     useEffect(() => {
         console.log('transactions updated', transactions)
+        // transactions have changed
         if (JSON.stringify(transactionsState) !== JSON.stringify(transactions)) {
-            setTransactionsState(transactions)
-            onEvent({ key: 'TRANSACTION' })
+
+            // there's a new transaction
+            if (JSON.stringify(newTransactionState) !== JSON.stringify(newTransaction)) {
+                setNewTransaction(newTransaction)
+                onEvent({ key: 'TRANSACTION', transactions, newTransaction })
+            }
         }
-    }, [ transactions, onEvent, transactionsState ])
+    }, [ transactions, onEvent, transactionsState, newTransaction, newTransactionState ])
 
 
     return (
@@ -35,7 +43,11 @@ export default function Transactions(props) {
                                 <div className='value'>ETHEREUM</div>
                             </div>
                         </div>
-                        <div className='containerMiddle'><img className='svg' src={media} alt="Ethereum logo"/></div>
+                        <div className='containerMiddle'>
+                            {/* <img className='svg' src={media} alt="Ethereum logo"/> */}
+                            <button onClick={() => dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }>SEND TEST TRANSACTIOn</button>
+
+                            </div>
                         <div className='containerRight containerInner'>
                             <div className='blockChainType glow'>
                                 <div className='value'>TRANSACTIONS</div>
@@ -48,7 +60,6 @@ export default function Transactions(props) {
                     </div>
                 </div>
             </HeaderFullWidth>
-             {/* <button onClick={() => dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }>SEND TEST TRANSACTIOn</button> */}
         </div>
     )
 }
