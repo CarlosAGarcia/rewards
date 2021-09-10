@@ -64,8 +64,7 @@ export default function Basic(props) {
         // makes sure vars are set
         if (!scene) setScene(new THREE.Scene()) 
         if (!camera) setCamera(new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000)) 
-        if (!renderer) setRenderer(new THREE.WebGLRenderer()) 
-        if (!controls) setControls(new TrackballControls( camera, renderer.domElement ))
+        if (!renderer) setRenderer(new THREE.WebGLRenderer())
 
         // if (!imgLoader) setImgLoader(new THREE.ImageBitmapLoader())
   
@@ -84,14 +83,6 @@ export default function Basic(props) {
         camera.rotation.x = -.4;
         camera.rotation.y = 0;
         camera.rotation.z = 0;
-
-        controls.rotateSpeed = 1.0;
-        controls.zoomSpeed = 1.2;
-        controls.panSpeed = 0.8;
-        controls.noZoom = false;
-        controls.noPan = false;
-        controls.staticMoving = true;
-        controls.dynamicDampingFactor = 0.3;
 
         renderer.setSize(window.innerWidth,window.innerHeight);
         scene.fog = new THREE.FogExp2('#0a0101', 0.001);
@@ -137,20 +128,46 @@ export default function Basic(props) {
         }
     }
 
+    // Should be called after user clicks on start controls
+    const onClickControls = () => {
+        const controls = new TrackballControls( camera, renderer.domElement )
+
+        controls.rotateSpeed = 1.0;
+        controls.zoomSpeed = 1.2;
+        controls.panSpeed = 0.8;
+        controls.noZoom = false;
+        controls.noPan = false;
+        controls.staticMoving = true;
+        controls.dynamicDampingFactor = 0.3;
+
+        // setControlsActive(true)
+        setControls(controls)
+    }
+
     // TODO: fix the formatting once you get actual payload
     const addTransaction = (event) => {
         console.log('addTransaction', event)
         const { key, transactions, newTransaction } = event
 
         if (newTransaction?.body?.fullTransaction) {
-            const { value, } = newTransaction?.body?.fullTransaction
+            const { value } = newTransaction?.body?.fullTransaction
 
-            addFloatingCoinDirectional({ objValues: newTransaction?.body?.fullTransaction, })
+            addFloatingCoinDirectional({ objValues: newTransaction?.body?.fullTransaction })
         }
         console.log({ key, transactions, newTransaction })
     }
     const addFloatingCoinDirectional = ({ objValues }) => {
+        const { value } = objValues
 
+        
+        const defW = 1;
+        const defH = 1;
+        const defD = 1;
+
+        const width = defW * (multiplier * value)
+
+
+        createSymbol({ width, height, depth, x, y, z, colour })
     }
 
     return (
