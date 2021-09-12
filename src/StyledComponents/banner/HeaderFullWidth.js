@@ -54,7 +54,10 @@ const HeaderFullWidthStyled = styled.div`
                 align-items: center;
                 -webkit-animation: bounce-in-top 1.1s both;
                 animation: bounce-in-top 1.1s both;
-                .blockchainText {
+                .blockchainTextLeft {
+                    margin-left: 1rem;
+                }
+                .blockchainTextRight {
                     margin-right: 1rem;
                 }
                 .blockchainText, .blockChainType {

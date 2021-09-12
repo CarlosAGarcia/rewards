@@ -1,5 +1,6 @@
 
 const initialState = {
+    newTransaction: {},
     transactions: [],
     isAWSLoading: false,
     isAWSConnected: false,

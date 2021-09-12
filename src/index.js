@@ -1,21 +1,27 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom';
 import App from './App';
-// import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import rootReducer from './reducers/rootReducer'
 import { createStore } from 'redux'
 import WebSocketProvider from './websocket/websocket'
+import StylingWrapper from './StyledComponents/StylingWrapper.style'
+import BasicCanvas from './background/BasicCanvas'
 
-const store = createStore(rootReducer)
+export const store = createStore(rootReducer)
 
 ReactDOM.render(
   <React.StrictMode>
-     <Provider store={store}>
-       <WebSocketProvider>
-          <App />
-       </WebSocketProvider>
-     </Provider>
+    <Provider store={store}>
+      <WebSocketProvider>
+
+          <StylingWrapper>
+            <BasicCanvas/>
+            <App />
+          </StylingWrapper>
+
+      </WebSocketProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

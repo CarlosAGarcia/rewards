@@ -1,34 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react'
+import { useDispatch } from "react-redux";
 import HeaderFullWidth from '../StyledComponents/banner/HeaderFullWidth'
-import media from '../media/ethereum.svg'
+import { useStore } from '../store'
 
 export default function Transactions(props) {
-    const { onEvent } = props
-
-    // initial fns necessary to set up dispatch + selector
-    const transactions = useSelector(state => state.transactions);
-    const newTransaction = useSelector(state => state.newTransaction);
-    
-    const dispatch = useDispatch()
-
-    const [ transactionsState, setTransactionsState ] = useState([])
-    const [ newTransactionState, setNewTransaction ] = useState({})
-
-    // on transaction
-    useEffect(() => {
-        console.log('transactions updated', transactions)
-        // transactions have changed
-        if (JSON.stringify(transactionsState) !== JSON.stringify(transactions)) {
-
-            // there's a new transaction
-            if (JSON.stringify(newTransactionState) !== JSON.stringify(newTransaction)) {
-                setNewTransaction(newTransaction)
-                onEvent({ key: 'TRANSACTION', transactions, newTransaction })
-            }
-        }
-    }, [ transactions, onEvent, transactionsState, newTransaction, newTransactionState ])
-
+    const dispatch = useDispatch() // legacy support
+    const addTransaction = useStore(state => state.addTransaction)
 
     return (
         <div className='transactionsWrapper'>
@@ -36,7 +13,7 @@ export default function Transactions(props) {
                 <div className='containerWrapper'>
                     <div className='container'>
                         <div className='containerLeft containerInner'>
-                            <div className='blockchainText'>
+                            <div className='blockchainText blockchainTextRight'>
                                 BLOCKCHAIN
                             </div>
                             <div className='blockChainType glow'>
@@ -45,7 +22,7 @@ export default function Transactions(props) {
                         </div>
                         <div className='containerMiddle'>
                             {/* <img className='svg' src={media} alt="Ethereum logo"/> */}
-                            <button onClick={() => dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }>SEND TEST TRANSACTIOn</button>
+                            <button onClick={() => { addTransaction(testTx);dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }}>SEND TEST TRANSACTIOn</button>
 
                             </div>
                         <div className='containerRight containerInner'>
@@ -53,7 +30,7 @@ export default function Transactions(props) {
                                 <div className='value'>TRANSACTIONS</div>
                             </div>
                             
-                            <div className='blockchainText'>
+                            <div className='blockchainText blockchainTextLeft'>
                                 EVENTS
                             </div>
                         </div>
