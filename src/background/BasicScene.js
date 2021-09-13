@@ -29,7 +29,9 @@ function BasicScene(props) {
     useEffect(() => {
         console.log('transactions updated?', transactions)
         // transactions have changed
-        if (newTransaction && JSON.stringify(newTransactionState) !== JSON.stringify(newTransaction)) {
+        const isDifferentTransaction = newTransaction && JSON.stringify(newTransactionState) !== JSON.stringify(newTransaction)
+        const isTestTx = newTransaction?.isTest
+        if (isTestTx || isDifferentTransaction) {
             setTransactionsState(transactions)
             setNewTransaction(newTransaction)
             addFloatingCoinDirectional({ objValues: newTransaction })
