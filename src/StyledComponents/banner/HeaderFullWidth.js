@@ -43,6 +43,24 @@ const HeaderFullWidthStyled = styled.div`
                 justify-content: center;
                 -webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	         animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                 button {
+                        background: transparent;
+                        border: 1px solid purple;
+                        margin-bottom: 1rem;
+                        color: pink;
+                        -webkit-box-shadow: 0px 6px 6px 2px rgb(255 0 253 / 80%);
+                        box-shadow: 0px 6px 6px 2px rgb(255 0 253 / 80%);
+                        text-shadow: 0px 3px 5px #ce00bf;
+                        &:hover {
+                                cursor: pointer;
+                                opacity: .9;
+                        }
+                        &:active {
+                                -webkit-box-shadow: 0px 3px 6px 2px rgb(255 0 253 / 80%);
+                                box-shadow: 0px 3px 6px 2px rgb(255 0 253 / 80%);  
+                                transform: translateY(3px);      
+                        }
+                 }
                 .svg {
                     width: 5rem;
                     height: auto;     

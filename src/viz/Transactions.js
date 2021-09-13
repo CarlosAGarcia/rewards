@@ -22,7 +22,7 @@ export default function Transactions(props) {
                         </div>
                         <div className='containerMiddle'>
                             {/* <img className='svg' src={media} alt="Ethereum logo"/> */}
-                            <button onClick={() => { addTransaction(testTx.body.fullTransaction);dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }}>SEND TEST TRANSACTIOn</button>
+                            <button onClick={() => { addTransaction(testTx.body.fullTransaction);dispatch({ type: 'MINED_TRANSACTION', payload: testTx }) }}>SEND TEST TRANSACTION</button>
 
                             </div>
                         <div className='containerRight containerInner'>
