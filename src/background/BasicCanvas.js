@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import BasicScene from '../background/BasicScene'
 import * as THREE from 'three'
@@ -10,8 +10,6 @@ export const CAM_POS_Z = 4;
 
 // Provider must be passed in again so canvas has access to redux. Context lost within canvas
 export default function BasicCanvas() {
-
-
     const [ camera, setCamera ] = useState(new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000))
 
     const init = () => {
@@ -26,9 +24,7 @@ export default function BasicCanvas() {
     useEffect(() => {
         const handleResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight
-            console.log({ ASPECT: camera.aspect, camera })
             camera.updateProjectionMatrix()
-
         }
 
         init()
@@ -37,7 +33,6 @@ export default function BasicCanvas() {
             window.removeEventListener('resize', handleResize, false)     
         }
     }, [])
-
 
     return (
         <Canvas

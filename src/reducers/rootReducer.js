@@ -8,7 +8,6 @@ const initialState = {
 }
 
 const rootReducer = (state = initialState, action) => {
-    console.log('dispatch', { action })
     switch (action.type) {
         case 'AWS_CONNECTED':
             return {

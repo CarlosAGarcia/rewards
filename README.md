@@ -4,8 +4,9 @@ Simple application meant to track ethereum blockchain events in real time.
 
 [Alchemy API](https://www.alchemy.com/)
     Alchemy API supports various blockchain dev tools including webhooks, websockets, api endpoints and more for various chains (incl. ethereum)
+
 [AWS](https://aws.amazon.com/)
-    This project is currently using a distributed asynchronous workflow made possible through AWS's API gateway, Lambda functions and DynamoDB
+    This project is currently using a serverless, distributed/async workflow made possible through AWS's API gateway, Lambda functions and DynamoDB
 
 ### `npm start`
 

@@ -5,7 +5,7 @@ import ConnectionToAWSLoader from './StyledComponents/Loaders/ConnectionToAWSLoa
 function App() {
   return (
     <div className="App">
-      <Transactions onEvent={(e)=>console.log('e', e)}/>
+      <Transactions />
       <ConnectionToAWSLoader />
     </div>
   );

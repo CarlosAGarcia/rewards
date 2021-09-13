@@ -178,11 +178,10 @@ export default function Basic(props) {
     }
     // main canvas render fn
     const render = () => {
-        console.log('RENDER FN --->>>', { pointer, camera, chil: scene.children })
 
         raycaster.setFromCamera(pointer, camera);
         var intersects = raycaster.intersectObjects(scene.children);
-        console.log('intersects',{ intersects })
+
         if (intersects.length > 0) {
             console.log('111')
         //   cube.material.color.set(0xff0000);
