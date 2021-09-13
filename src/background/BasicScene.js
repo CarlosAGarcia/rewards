@@ -61,8 +61,13 @@ function BasicScene(props) {
         const x = spawnX
         const y = spawnY
         const z = spawnZ
+
+        const movePerRenderX = (defaultEdgeX - spawnX) / 1000
+        const movePerRenderY = (defaultEdgeY - spawnY) / 1000
+        const movePerRenderZ = (defaultEdgeZ - spawnZ) / 1000
+        console.log({ move: [ movePerRenderX, movePerRenderY, movePerRenderZ ] })
         const Cs = <CoinSymbol
-                movement={[0.1,0,0]}
+                movement={[ movePerRenderX, movePerRenderY, movePerRenderZ ]}
                 width={width} height={height} depth={depth}
                 x={x} y={y} z={z}
             />

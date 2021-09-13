@@ -2,7 +2,13 @@ import React, { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 
 export default function BasicObject(props) {
-    const { movement, width = 1, height = 1, depth = 1, x = 0, y = 0, z = 0, rotationX = 0, rotationY = 0, rotationZ = 0, customGeometry, color, colorActive, customMaterial } = props
+    const {
+        movement,
+        width = 1, height = 1, depth = 1,
+        x = 0, y = 0, z = 0, 
+        rotationX = 0, rotationY = 0, rotationZ = 0,
+        customGeometry, color, colorActive, customMaterial
+    } = props
 
     // STATE VARS Set up state for the hovered and active state
     const [ hovered, setHover ] = useState(false)
