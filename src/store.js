@@ -11,6 +11,7 @@ export const useStore = create(set => ({
     isAWSErr: null,
     addTransaction: (transaction) => set(state => ({ ...state, newTransaction: transaction, transactions: [ ...state.transactions, transaction ] })),
     removeTransactionByHash: (hash) => set(state => ({ ...state, newTransaction: state.newTransaction.hash === hash ? {} : state.newTransaction, transactions: state.transactions.filter(tx => tx.hash && (tx.hash !== hash) ) })),
-    increasePopulation: () => set(state => ({ bears: state.bears + 1 })),
-    removeAllBears: () => set({ bears: 0 })
+    transactionModal: [],
+    // addTransactionModal: (transaction) => set(state => ({ ...state, transactionModal })),
+
 }))

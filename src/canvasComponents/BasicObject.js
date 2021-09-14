@@ -54,11 +54,15 @@ export default function BasicObject(props) {
         setHover(isHovering)
     }
 
+    const onClick = () => {
+        setActive(!active)
+    }
+
     return (
         <mesh
             {...props}
             ref={ref}
-            onClick={(e) => setActive(!active)}
+            onClick={(e) => onClick }
             onPointerOver={(e) => onHover(true)}
             onPointerOut={(e) => onHover(false)}
             position={[x, y, z]}
