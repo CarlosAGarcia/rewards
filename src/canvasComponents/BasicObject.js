@@ -20,6 +20,9 @@ export default function BasicObject(props) {
 
     const TIME_ALIVE_IN_RENDERS = useStore(state => state.TIME_ALIVE_IN_RENDERS)
     const setTimeAliveInRenders = useStore(state => state.setTimeAliveInRenders)
+    const transactionClicked = useStore(state => state.transactionClicked)
+    const removeTransactionClicked = useStore(state => state.removeTransactionClicked)
+
 
     // object ref to use in useFrame
     const ref = useRef()
@@ -55,6 +58,7 @@ export default function BasicObject(props) {
     }
 
     const onClick = () => {
+        active ? removeTransactionClicked(hash) : transactionClicked(hash)
         setActive(!active)
     }
 
@@ -62,7 +66,7 @@ export default function BasicObject(props) {
         <mesh
             {...props}
             ref={ref}
-            onClick={(e) => onClick }
+            onClick={(e) => onClick() }
             onPointerOver={(e) => onHover(true)}
             onPointerOut={(e) => onHover(false)}
             position={[x, y, z]}

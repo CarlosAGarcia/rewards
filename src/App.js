@@ -5,7 +5,7 @@ import FullWindowMouseTracking from './viz/FullWindowMouseTracking'
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" id='App'>
       <Transactions />
       <FullWindowMouseTracking />
       <ConnectionToAWSLoader />
