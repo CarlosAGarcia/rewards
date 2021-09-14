@@ -1,6 +1,8 @@
-# ETHEREUM BLOCKCHAIN EVENT TRACKER
 
------> https://carlosagarcia.github.io/rewards/  <------
+LINK TO SITE -----> https://carlosagarcia.github.io/rewards/  <------ LINK TO SITE
+
+
+# ETHEREUM BLOCKCHAIN EVENT TRACKER
 
 Simple application meant to track ethereum blockchain events in real time.
 ## MADE POSSIBLE BY
