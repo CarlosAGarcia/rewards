@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
+import { useStore } from '../../store'
 
 const HeaderFullWidthStyled = styled.div`
     width: 100%;
@@ -12,6 +13,29 @@ const HeaderFullWidthStyled = styled.div`
     .contentContainer {
         width: 100%;
         padding: 3% 5%;
+        .connectionContainer {
+                position: absolute;
+                font-family: 'Catamaran', sans-serif;
+                width: 100%;
+
+                .connectionWrapper {
+                        display: flex;
+                        justify-content: center;                        
+                        margin-right: 15rem;
+                        margin-top: 6rem;
+                        .connectionQText {
+                                margin-right: .5rem;
+                                color: #6F4D87;
+                                text-shadow: 0px 0px 10px #6F4D87;
+
+                        }
+                        .connectionText {
+                                color: ${props => props.isWSConnectedColor};
+                                text-shadow: 0px 0px 30px ${props => props.isWSConnectedColor};
+                        }
+                }
+
+        }
         .borderBottom1 {
             width: 100%;
             border-bottom: 1px solid grey;
@@ -322,12 +346,19 @@ const HeaderFullWidthStyled = styled.div`
 
 export default function HeaderFullWidth(props) {
     const { backgroundColor, customHeight, customClassname } = props
+    const isWSConnected = `${useStore(state => state.isWSConnected)}`.toUpperCase()
+    const isWSConnectedColor = isWSConnected === 'FALSE' ? '#FF146E' : '#6DFFB6'
 
     // const useState(0)
+        
     return (
-        <HeaderFullWidthStyled backgroundColor={backgroundColor} customHeight={customHeight} className={`headerFullWidth ${customClassname}`}>
+        <HeaderFullWidthStyled isWSConnectedColor={isWSConnectedColor} backgroundColor={backgroundColor} customHeight={customHeight} className={`headerFullWidth ${customClassname}`}>
             <div className='contentContainer'>
-
+                <div className='connectionContainer'>
+                        <div className='connectionWrapper'>
+                                <span className='connectionQText'>AWS WEBSOCKET CONNECTED: </span><span className='connectionText'>{isWSConnected}</span>
+                        </div>
+                </div>
                 <div className='content'>
                     {props.children}
 

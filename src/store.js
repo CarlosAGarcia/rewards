@@ -9,6 +9,8 @@ export const useStore = create(set => ({
     isAWSLoading: false,
     isAWSConnected: false,
     isAWSErr: null,
+    isWSConnected: false,
+    setWSConnection: (isWSConnected) => set(state => ({ ...state, isWSConnected })),
     setTimeAliveInRenders: (numOfRenders) => set(state => ({ ...state, TIME_ALIVE_IN_RENDERS: numOfRenders })),
     addTransaction: (transaction) => set(state => ({ ...state, newTransaction: transaction, transactions: [ ...state.transactions, transaction ] })),
     removeTransactionByHash: (hash) => set(state => ({ ...state, newTransaction: state.newTransaction.hash === hash ? {} : state.newTransaction, transactions: state.transactions.filter(tx => tx.hash && (tx.hash !== hash) ) })),
