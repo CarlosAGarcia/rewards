@@ -69,9 +69,9 @@ function BasicScene(props) {
 
         const defaultSizeOfOneUnit = .05
 
-        const width = parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4))
-        const height = parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4))
-        const depth = parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4))
+        const width = multiplier >= .1 ? parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4)) : defaultSizeOfOneUnit
+        const height = multiplier >= .1 ? parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4)) : defaultSizeOfOneUnit
+        const depth = multiplier >= .1 ? parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4)) : defaultSizeOfOneUnit
 
 
         // from 0-1, 1-3, 3-5, 10-20, 20-50, 50-100, 100-200, 200+

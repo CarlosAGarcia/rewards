@@ -47,8 +47,22 @@ export default function WebSocketProvider(props) {
             const { data } = e
             console.log('e ->', data)
 
-            const tx = formatTx(data) // to use in -> { value, hash, isTest }
-            addTransaction(tx)
+            const tx = formatTx(data) // to use in -> needs { value, hash, isTest } per tx
+
+            // multiple txs in one msg
+            if (tx.webhookType === 'ADDRESS_ACTIVITY') {
+                tx.activity.map(txObj => {
+                    const isTestObjs = txObj.hash === '0x4471ef5330b313b9a0bda11e36e693b3d0b6d2315ae0e738fa0e056119b17428' || txObj.hash === '0xd129507fdfc62b7222b3fc84edd5832a1d7a43ee0be9e188a394cfc23f3b3868'
+                    if (isTestObjs) {
+                        txObj.isTest = true
+                        txObj.hash = `TEST_TRANSACTION - ${Math.random() * 2}`
+                    }
+
+                    addTransaction(txObj)
+                })
+            } else {
+                addTransaction(tx)
+            }
             // dispatch({ type: 'MINED_TRANSACTION', payload: e })
         }
         const onDisconnect = (e) => {
@@ -74,12 +88,15 @@ export default function WebSocketProvider(props) {
     )
 }
 
-// change the hash 
+// change the hash
+// returns in format { value, hash, isTest }
 const formatTx = (transaction) => {
     const tx = JSON.parse(transaction)
+
     if (tx?.hash === '0x5a4bf6970980a9381e6d6c78d96ab278035bbff58c383ffe96a0a2bbc7c02a4b') {
         tx.isTest = true
         tx.hash = `TEST_TRANSACTION - ${Math.random() * 2}`
     }
+
     return tx
 }
