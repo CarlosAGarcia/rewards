@@ -30,7 +30,7 @@ function BasicScene(props) {
     // // on transaction
     useEffect(() => {
         // transactions have changed
-        const isDifferentTransaction = !isEmpty(newTransaction) && JSON.stringify(newTransactionState) !== JSON.stringify(newTransaction)
+        const isDifferentTransaction = newTransaction?.isTest || (!isEmpty(newTransaction) && JSON.stringify(newTransactionState) !== JSON.stringify(newTransaction)) // test or different tx vals
 
         if (isDifferentTransaction) {
             setTransactionsState(transactions)
@@ -40,14 +40,14 @@ function BasicScene(props) {
     }, [ transactions, newTransaction, transactionsState, newTransactionState ])
 
     const addFloatingCoinDirectional = ({ objValues }) => {
-        const { value, gas, gasPrice, hash, isTest } = objValues
-
+        const { value, hash, isTest } = objValues
+        console.log('Adding Tx', { value, hash, isTest })
         const value_decimal = parseInt(value, 16)
-        const gas_decimal = parseInt(gas, 16)
-        const gasPrice_decimal = parseInt(gasPrice, 16)
-        const gasCost_Decimal = gas_decimal * gasPrice_decimal
+        // const gas_decimal = parseInt(gas, 16)
+        // const gasPrice_decimal = parseInt(gasPrice, 16)
+        // const gasCost_Decimal = gas_decimal * gasPrice_decimal
 
-        const valueInEth = (value_decimal + (gasCost_Decimal)) * (1/(Math.pow(10, 18))) // value in eth
+        const valueInEth = (value_decimal) * (1/(Math.pow(10, 18))) // value in eth
         
         // Changes size of stuff
         const getTestMult = () => {
@@ -67,11 +67,11 @@ function BasicScene(props) {
         const multiplier = isTest ? getTestMult() : valueInEth // simplest -> to be changed later (rn == 1)
 
 
-        const defSizeOfOneUnit = .05
+        const defaultSizeOfOneUnit = .05
 
-        const width = parseFloat((defSizeOfOneUnit * multiplier).toFixed(4))
-        const height = parseFloat((defSizeOfOneUnit * multiplier).toFixed(4))
-        const depth = parseFloat((defSizeOfOneUnit * multiplier).toFixed(4))
+        const width = parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4))
+        const height = parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4))
+        const depth = parseFloat((defaultSizeOfOneUnit * multiplier).toFixed(4))
 
 
         // from 0-1, 1-3, 3-5, 10-20, 20-50, 50-100, 100-200, 200+

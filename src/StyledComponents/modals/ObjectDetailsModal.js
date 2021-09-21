@@ -68,7 +68,7 @@ export default function ObjectDetailsModal(props) {
         const valueInEth = isValue ? parseInt(val, 16) * (1/(Math.pow(10, 18))) : null
 
         const url = canBeLinks.includes(keyUpper) ? `https://etherscan.io/search?f=0&q=${val}` : undefined
-        const text = isValue ? `${val} (~${valueInEth}) ETH` : `${val}`
+        const text = isValue ? `${val} (approx. ${valueInEth}) ETH` : `${val}`
 
         return <a target="_blank" rel="noreferrer" href={url} >
             {text}

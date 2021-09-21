@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 
 const CustomPortal = ({ id, children }) => {
   const target = usePortal(id);
-  console.log('set target to ', target)
 
   return createPortal(
     children,
