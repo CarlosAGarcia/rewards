@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/rewards/static/js/main.3c807114.chunk.js",
-    "main.js.map": "/rewards/static/js/main.3c807114.chunk.js.map",
+    "main.js": "/rewards/static/js/main.c3d9e06a.chunk.js",
+    "main.js.map": "/rewards/static/js/main.c3d9e06a.chunk.js.map",
     "runtime-main.js": "/rewards/static/js/runtime-main.6c255b96.js",
     "runtime-main.js.map": "/rewards/static/js/runtime-main.6c255b96.js.map",
     "static/js/2.414c50fe.chunk.js": "/rewards/static/js/2.414c50fe.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.6c255b96.js",
     "static/js/2.414c50fe.chunk.js",
-    "static/js/main.3c807114.chunk.js"
+    "static/js/main.c3d9e06a.chunk.js"
   ]
 }
