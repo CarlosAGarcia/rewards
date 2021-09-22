@@ -58,8 +58,10 @@ export default function BasicObject(props) {
     }
 
     const onClick = () => {
-        active ? removeTransactionClicked(hash) : transactionClicked(hash)
-        setActive(!active)
+        if (hash) {
+            active ? removeTransactionClicked(hash) : transactionClicked(hash)
+            setActive(!active)
+        }
     }
 
     return (
