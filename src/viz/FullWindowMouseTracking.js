@@ -36,7 +36,10 @@ export default function FullWindowMouseTracking() {
 
     // on updates of transaction clicked + transactions
     useEffect(() => {
-        if (JSON.stringify(hashesClicked) !== JSON.stringify(transactionsClicked)) setHashesClicked(transactionsClicked)
+        if (JSON.stringify(hashesClicked) !== JSON.stringify(transactionsClicked)) {
+            setHashesClicked(transactionsClicked)
+            // setInitialModalPos() // 
+        }
     }, [ transactionsClicked, hashesClicked ])
 
 
