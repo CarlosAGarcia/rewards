@@ -42,8 +42,6 @@ export default function FullWindowMouseTracking() {
         }
     }, [ transactionsClicked, hashesClicked ])
 
-
-
     return (
         <FullWidthMouseTracking>
             {
