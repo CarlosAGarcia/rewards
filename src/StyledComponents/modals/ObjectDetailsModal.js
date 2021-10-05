@@ -109,7 +109,7 @@ export default function ObjectDetailsModal(props) {
             {textFormatted}
         </a>
     }
-    console.log({ ...position })
+    console.log('RENDER', { hash, ...position })
     return (
         <CustomPortal id={'App'} className='customPortalContainer'>
             <Draggable>
