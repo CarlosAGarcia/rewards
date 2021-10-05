@@ -15,7 +15,8 @@ const HeaderFullWidthStyled = styled.div`
         padding: 3% 5%;
         .connectionContainer {
                 position: absolute;
-                font-family: 'Catamaran', sans-serif;
+                /* font-family: 'Catamaran', sans-serif; */
+                font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
                 width: 100%;
 
                 .connectionWrapper {
@@ -104,7 +105,8 @@ const HeaderFullWidthStyled = styled.div`
                 }
                 .blockchainText, .blockChainType {
                     font-size: 2.5rem;
-                    font-family: 'Catamaran', sans-serif;
+                    /* font-family: 'Catamaran', sans-serif; */
+                    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
                     color: #e6f3fe;
                     .type {
                         font-size: .5rem;
@@ -354,11 +356,11 @@ export default function HeaderFullWidth(props) {
     return (
         <HeaderFullWidthStyled isWSConnectedColor={isWSConnectedColor} backgroundColor={backgroundColor} customHeight={customHeight} className={`headerFullWidth ${customClassname}`}>
             <div className='contentContainer'>
-                <div className='connectionContainer'>
+                {/* <div className='connectionContainer'>
                         <div className='connectionWrapper'>
                                 <span className='connectionQText'>AWS WEBSOCKET CONNECTED: </span><span className='connectionText'>{isWSConnected}</span>
                         </div>
-                </div>
+                </div> */}
                 <div className='content'>
                     {props.children}
 

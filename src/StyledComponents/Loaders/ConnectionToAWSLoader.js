@@ -1,66 +1,69 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from "react-redux";
+import React from 'react'
+import { useStore } from '../../store'
 import styled from "styled-components";
 
 const ConnectionToAWSLoaderStyled = styled.div`
-    .loaderContainer {
         position: absolute;
+        padding: 0rem 3rem 2rem 0rem;
+        bottom: 0;
+        right: 0;
+    .loaderContainer {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 4rem;
-    height: 4rem;
-    top: 33%;
-    left: 48%;
+        padding-bottom: .5rem;
         * {
-            font-family: 'Catamaran', sans-serif;
-            font-size: 1.5rem;
+            /* font-family: 'Catamaran', sans-serif; */
+            font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+            font-size: 1rem;
+        }
+        .websocketStatusText {
+            color: #6F4D87;
+            text-shadow: 0px 0px 10px #6f4d87;
+            margin-right: .5rem;
+        }
+        .text {
         }
         .connecting {
+            display: flex;
             .innerText {
                 color: yellow;
+                color: #FFFB91;
+                text-shadow: 0px 0px 30px #FFFB91;
             }
         }
         .connected {
-            color: green;
+            color: #6DFFB6;
+            text-shadow: 0px 0px 30px #6dffb6;
         }
+    }
+    .authorText{
+        font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+        color: #f9efff;
+        display: flex;
+        justify-content: flex-end;
     }
 `
 
 export default function ConnectionToAWSLoader() {
-    const isAWSConnected = useSelector(state => state.isAWSConnected);
-    const isAWSLoading = useSelector(state => state.isAWSLoading);
-    const isAWSErr = useSelector(state => state.isAWSErr);
+    const isWSConnected = useStore(state => state.isWSConnected);
+    const isAWSLoading = useStore(state => state.isAWSLoading);
+    const isAWSErr = useStore(state => state.isAWSErr);
 
-    const [ isAWSConnected_S, setIsAWSConnected_S ] = useState(isAWSConnected)
-    const [ isAWSLoading_S, setIsAWSLoading_S ] = useState(isAWSLoading)
-    const [ isAWSErr_S, setIsAWSErr_S ] = useState(isAWSErr)
 
-    // sets to use always use props
-    useEffect(() => {
-        if (isAWSConnected_S !== isAWSConnected) setIsAWSConnected_S(isAWSConnected)
-        if (isAWSLoading_S !== isAWSLoading) setIsAWSLoading_S(isAWSLoading)
-        if (isAWSErr_S !== isAWSErr) setIsAWSErr_S(isAWSErr)
-    }, [ isAWSConnected, isAWSLoading, isAWSErr, isAWSLoading_S, isAWSConnected_S, isAWSErr_S ])
-
-    // useEffect(() => {
-
-    //     if (isAWSConnected_S !== isAWSConnected){
-            
-    //     }
-
-    // }, [ isAWSLoading_S, isAWSConnected_S, isAWSErr_S ])
-
-    return (
+    console.log('rendr', { isWSConnected, isAWSLoading, isAWSErr })
+    return (    
         <ConnectionToAWSLoaderStyled>
             <div className='loaderContainer'>
-                {isAWSLoading_S && <div className='connecting text'>
+                <div className='websocketStatusText'>WEBSOCKET STATUS: </div>
+                {isAWSLoading && <div className='connecting text'>
                     <span className='innerText first'>CONNECTING</span>
                     <span  className='innerText second'> .</span>
                     <span  className='innerText third'> .</span>
                     <span  className='innerText fourth'> .</span>
                 </div>}
-                {!isAWSLoading_S && isAWSConnected_S && <div className='connected text'>CONNECTED!</div>}            
+                {!isAWSLoading && isWSConnected && <div className='connected text'>CONNECTED</div>}            
+            </div>
+            <div className='authorText'>
+                BY CARLOS GARCIA
             </div>
         </ConnectionToAWSLoaderStyled>
     )

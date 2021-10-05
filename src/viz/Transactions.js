@@ -12,20 +12,20 @@ export default function Transactions(props) {
             <HeaderFullWidth customClassname={'header'}>
                 <div className='containerWrapper'>
                     <div className='container'>
-                        <div className='containerLeft containerInner'>
+                        {/* <div className='containerLeft containerInner'>
                             <div className='blockchainText blockchainTextRight'>
                                 BLOCKCHAIN
                             </div>
                             <div className='blockChainType glow'>
                                 <div className='value'>ETHEREUM</div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className='containerMiddle'>
                             {/* <img className='svg' src={media} alt="Ethereum logo"/> */}
                             <button onClick={() => { addTransaction(testTx().body.fullTransaction);dispatch({ type: 'MINED_TRANSACTION', payload: testTx() }) }}>SEND TEST TRANSACTION</button>
 
                             </div>
-                        <div className='containerRight containerInner'>
+                        {/* <div className='containerRight containerInner'>
                             <div className='blockChainType glow'>
                                 <div className='value'>TRANSACTIONS</div>
                             </div>
@@ -33,7 +33,7 @@ export default function Transactions(props) {
                             <div className='blockchainText blockchainTextLeft'>
                                 EVENTS
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </HeaderFullWidth>

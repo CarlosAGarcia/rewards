@@ -20,7 +20,8 @@ const ObjectDetailsModalStyled = styled.div`
         backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
     }
     .ModalContainer {
-        font-family: 'Catamaran', sans-serif;
+        /* font-family: 'Catamaran', sans-serif; */
+        font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
         width: 21rem;
         height: 17rem;
         color: #000066;
@@ -108,7 +109,7 @@ export default function ObjectDetailsModal(props) {
             {textFormatted}
         </a>
     }
-    console.log({ position })
+    console.log({ ...position })
     return (
         <CustomPortal id={'App'} className='customPortalContainer'>
             <Draggable>
