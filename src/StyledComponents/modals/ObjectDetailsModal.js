@@ -7,8 +7,8 @@ import Draggable from 'react-draggable';
 
 const ObjectDetailsModalStyled = styled.div`
     position: absolute;
-    top: 10px; //${props => props.position ? props.position.y : 0};
-    left: 10px; //${props => props.position ? props.position.x : 0};
+    top: ${props => props.position ? `${props.position.y}px` : 0};
+    left: ${props => props.position ? `${props.position.x}px` : 0};
     background-color: rgb(191 241 251);
     overflow: scroll;
     opacity: .8;
@@ -91,7 +91,7 @@ export default function ObjectDetailsModal(props) {
     useEffect(() => {
         const transaction = transactions.find(tx => tx.hash === hash )
         setDetails(transaction)
-    }, [])
+    }, [ hash ])
 
     const generateLink = (key) => {
         const keyUpper = key.toUpperCase()

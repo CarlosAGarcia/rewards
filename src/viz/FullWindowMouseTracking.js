@@ -39,27 +39,20 @@ export default function FullWindowMouseTracking() {
     // on updates of transaction clicked + transactions
     useEffect(() => {
         let newTxs = hashesClicked
-        const hashToRemove = hashesClicked.find(obj => transactionsClicked.includes(obj.hash) ? undefined : obj.hash ) // finds hash in state that isnt in transactions clicked (remove this hash)
-        if (hashToRemove) {
-            newTxs = hashesClicked.filter(obj => obj.hash !== hashToRemove)
+        const hashObjToRemove = hashesClicked.find(obj => !transactionsClicked.includes(obj.hash)) // finds hash in state that isnt in transactions clicked (remove this hash)
+        if (hashObjToRemove) {
+            const { hash } = hashObjToRemove
+            newTxs = hashesClicked.filter(obj => obj.hash !== hash)
         } else {
             const hashToAdd = transactionsClicked.find(hash => hashesClicked.find(obj => obj.hash === hash) ? undefined : hash) // finds hash in transactions that isnt in state (add this hash)
             if (hashToAdd) newTxs = [ ...hashesClicked, { hash: hashToAdd, position }]
         }
-
-
-        // const addTx = transactionsClicked.includes(lastTxClicked) // if it's present. Then we add it to our state
-        // if (addTx) {
-        //     const isAlrInState = hashesClicked.find(obj => obj.hash === lastTxClicked)
-        //     if (!isAlrInState) newTxs = [ ...hashesClicked, { hash: lastTxClicked, position }]
-        // } else {
-        //     newTxs = hashesClicked.filter(obj => obj.hash !== lastTxClicked)
-        // }
-
+        console.log(newTxs)
         setHashesClicked(newTxs)
 
     }, [ transactionsClicked ])
 
+    // maybe save the component in state instead of just hashes as components persist and last component is removed and all others are updated in their data to match array sort
     return (
         <FullWidthMouseTracking>
             {
